@@ -1,7 +1,9 @@
 package org.alvin.home.imageutil;
 
 import javax.imageio.ImageIO;
+import java.awt.color.ColorSpace;
 import java.awt.image.BufferedImage;
+import java.awt.image.ColorConvertOp;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -106,6 +108,15 @@ public class ImageStoreUtils {
         try (ByteArrayInputStream bis = new ByteArrayInputStream(data)) {
             return ImageIO.read(bis);
         }
+    }
+
+    /**
+     * 图片灰色
+     * @param srcImg
+     * @return
+     */
+    public BufferedImage toGray(BufferedImage srcImg) {
+        return new ColorConvertOp(ColorSpace.getInstance(ColorSpace.CS_GRAY), null).filter(srcImg, null);
     }
 
 }
